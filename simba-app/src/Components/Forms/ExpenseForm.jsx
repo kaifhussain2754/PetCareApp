@@ -45,11 +45,9 @@ const ExpenseForm = () => {
   return (
     <Box 
       sx={{ 
-        minHeight: '100vh', 
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        background: 'linear-gradient(135deg, #c31432 0%, #240b36 100%)',
         padding: 2
       }}
     >
