@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faListAlt, faBell, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 
-function SimbasCare() {
+function Reminders() {
   const navigate = useNavigate();
 
   const handleMouseEnter = (event) => {
@@ -20,7 +20,7 @@ function SimbasCare() {
     <div className="container" style={{ paddingTop: '20px' }}>
       <h1 className="text-center">Simba's Care Records</h1>
       <div className="row" style={{ marginTop: '20px' }}>
-        <div className="col-md-3 d-flex align-items-stretch">
+      <div className="col-md-3 d-flex align-items-stretch">
           <div
             className="card"
             style={{ cursor: 'pointer', transition: 'all 0.3s ease', marginBottom: '20px', width: '100%' }}
@@ -28,9 +28,9 @@ function SimbasCare() {
             onMouseLeave={handleMouseLeave}
           >
             <div className="card-body text-center">
-              <FontAwesomeIcon icon={faPlusCircle} size="3x" style={{ color: '#ff6f61', marginBottom: '10px' }} />
-              <h5 className="card-title">Add a Care Record</h5>
-              <p className="card-text">Record details about Simba's vet visits, medication, and more.</p>
+              <FontAwesomeIcon icon={faBell} size="3x" style={{ color: '#ff6f61', marginBottom: '10px' }} />
+              <h5 className="card-title">Upcoming Reminders</h5>
+              <p className="card-text">Check reminders for upcoming vet visits, medication, and other important tasks.</p>
               <button
                 style={{
                   backgroundColor: '#ff6f61',
@@ -42,11 +42,11 @@ function SimbasCare() {
                   transition: 'all 0.3s ease',
                   boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
                 }}
-                onClick={() => navigate('/add-care-record')}
+                onClick={() => navigate('/upcoming-reminders')}
                 onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0px 0px 20px #ff6f61')}
                 onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2)')}
               >
-                Add Record
+                View Reminders
               </button>
             </div>
           </div>
@@ -59,9 +59,9 @@ function SimbasCare() {
             onMouseLeave={handleMouseLeave}
           >
             <div className="card-body text-center">
-              <FontAwesomeIcon icon={faListAlt} size="3x" style={{ color: '#ff6f61', marginBottom: '10px' }} />
-              <h5 className="card-title">All Care Records</h5>
-              <p className="card-text">View all recorded care details and history for Simba.</p>
+              <FontAwesomeIcon icon={faCalendarPlus} size="3x" style={{ color: '#ff6f61', marginBottom: '10px' }} />
+              <h5 className="card-title">Set a Reminder</h5>
+              <p className="card-text">Schedule a new reminder for Simba’s care activities.</p>
               <button
                 style={{
                   backgroundColor: '#ff6f61',
@@ -73,11 +73,11 @@ function SimbasCare() {
                   transition: 'all 0.3s ease',
                   boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
                 }}
-                onClick={() => navigate('/all-care-records')}
+                onClick={() => navigate('/set-reminder')}
                 onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0px 0px 20px #ff6f61')}
                 onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2)')}
               >
-                View Records
+                Set Reminder
               </button>
             </div>
           </div>
@@ -87,4 +87,4 @@ function SimbasCare() {
   );
 }
 
-export default SimbasCare;
+export default Reminders;

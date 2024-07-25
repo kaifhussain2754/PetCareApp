@@ -65,3 +65,127 @@ export const deleteExpense = async (id) => {
     throw error;
   }
 };
+
+// Care Records API functions
+export const getCareRecords = async () => {
+  try {
+    const response = await fetch(`${API_URL}/care-records`);
+    return handleResponse(response);
+  } catch (error) {
+    console.error('Error fetching care records:', error);
+    throw error;
+  }
+};
+
+export const getCareRecordById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/care-records/${id}`);
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error fetching care record with id ${id}:`, error);
+    throw error;
+  }
+};
+
+export const createCareRecord = async (careRecord) => {
+  try {
+    const response = await fetch(`${API_URL}/care-records`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(careRecord),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error('Error creating care record:', error);
+    throw error;
+  }
+};
+
+export const updateCareRecord = async (id, careRecord) => {
+  try {
+    const response = await fetch(`${API_URL}/care-records/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(careRecord),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error updating care record with id ${id}:`, error);
+    throw error;
+  }
+};
+
+export const deleteCareRecord = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/care-records/${id}`, { method: 'DELETE' });
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error deleting care record with id ${id}:`, error);
+    throw error;
+  }
+};
+
+// Reminders API functions
+export const getReminders = async () => {
+  try {
+    const response = await fetch(`${API_URL}/reminders`);
+    return handleResponse(response);
+  } catch (error) {
+    console.error('Error fetching reminders:', error);
+    throw error;
+  }
+};
+
+export const getReminderById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/reminders/${id}`);
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error fetching reminder with id ${id}:`, error);
+    throw error;
+  }
+};
+
+export const createReminder = async (reminder) => {
+  try {
+    const response = await fetch(`${API_URL}/reminders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        reminder_name: reminder.reminder_name,
+        reminder_date_time: reminder.reminder_date_time,
+      }),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error('Error creating reminder:', error);
+    throw error;
+  }
+};
+
+export const updateReminder = async (id, reminder) => {
+  try {
+    const response = await fetch(`${API_URL}/reminders/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        reminder_name: reminder.reminder_name,
+        reminder_date_time: reminder.reminder_date_time,
+      }),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error updating reminder with id ${id}:`, error);
+    throw error;
+  }
+};
+
+export const deleteReminder = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/reminders/${id}`, { method: 'DELETE' });
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error deleting reminder with id ${id}:`, error);
+    throw error;
+  }
+};

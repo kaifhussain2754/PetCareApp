@@ -128,6 +128,9 @@ const ExpenseCalculator = () => {
         textAlign: 'center',
         fontWeight: 'bold',
         marginBottom: '20px',
+        background: '#ff6f61',
+        padding: '5px',
+        borderRadius: '1rem'
       }}>
         Expense History
       </Typography>

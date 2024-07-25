@@ -6,6 +6,7 @@ html, body {
   font-family: 'Roboto', sans-serif;
   color: #f6e3e4;
   background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+  overflow: auto; /* Ensure scrolling works */
 }
 
 /* Glassmorphism container */
@@ -16,6 +17,7 @@ html, body {
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  position: relative; /* Ensure it stays on top */
 }
 
 /* Form styles */
