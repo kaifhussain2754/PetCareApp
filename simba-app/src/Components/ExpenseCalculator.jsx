@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, TextField, MenuItem, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Alert, Container } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getExpenses, deleteExpense } from '../apiService'; // Adjust the import path as needed
+import { getExpenses, deleteExpense } from '../services/apiService'; // Adjust the import path as needed
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEdit, faTrashAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

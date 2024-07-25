@@ -1,9 +1,8 @@
-// src/Components/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalculator, faStethoscope, faBell, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
-import { getReminders } from '../apiService'; // Import the API function
+import { faCalculator, faStethoscope, faBell, faCalendarPlus, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import { getReminders } from '../services/apiService'; // Import the API function
 import { colors } from '@mui/material';
 
 function Dashboard() {
@@ -17,7 +16,7 @@ function Dashboard() {
         console.log('Fetched reminders response:', response); // Log response for debugging
 
         const count = response.count || response.total || response.length || 0;
-        
+
         setRemindersCount(count);
       } catch (error) {
         console.error('Error fetching reminders count:', error);
@@ -48,6 +47,13 @@ function Dashboard() {
       title: "Upcoming Reminders",
       description: "Set reminders for important tasks and appointments for Simba.",
       link: '/reminders'
+    },
+    {
+      id: 4,
+      icon: faClipboardList,
+      title: "To-Do List",
+      description: "Manage your daily tasks for Simba.",
+      link: '/todo-list'
     }
   ];
 
@@ -146,7 +152,7 @@ function Dashboard() {
       </div>
       <div className="row" style={{ marginTop: '20px' }}>
         {cards.map((card) => (
-          <div className="col-md-4" key={card.id}>
+          <div className="col-md-4" key={card.id} style={{ padding: '10px' }}>
             <div
               className="card"
               style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}

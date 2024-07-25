@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getExpenseById, updateExpense } from '../apiService'; // Adjust the import path as needed
+import { getExpenseById, updateExpense } from '../services/apiService'; // Adjust the import path as needed
 import { TextField, Button, Typography, Box, CssBaseline, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 const EditExpense = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Dialog, DialogActions, DialogContent, DialogTitle, CssBaseline } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { createReminder } from '../../apiService'; // Adjust path if needed
+import { createReminder } from '../../services/apiService'; // Adjust path if needed
 
 const ReminderForm = () => {
   const [reminderData, setReminderData] = useState({

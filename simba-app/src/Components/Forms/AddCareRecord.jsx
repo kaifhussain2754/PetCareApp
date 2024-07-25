@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Box, Dialog, DialogActions, DialogConten
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { createCareRecord } from '../../apiService'; // Adjust the path as needed
+import { createCareRecord } from '../../services/apiService'; // Adjust the path as needed
 
 const AddCareRecord = () => {
   const [careData, setCareData] = useState({

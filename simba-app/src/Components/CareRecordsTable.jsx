@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCareRecords, deleteCareRecord } from '../apiService'; // Adjust the path as needed
+import { getCareRecords, deleteCareRecord } from '../services/apiService'; // Adjust the path as needed
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Alert, Box } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

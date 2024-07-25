@@ -14,6 +14,8 @@ import ReminderForm from './Components/Forms/ReminderForm';
 import UpcomingReminders from './Components/UpcomingReminder';
 import Reminders from './Components/Reminders';
 import ExpensesPage from './Components/ExpensesPage';
+import MissedReminders from './Components/MissedReminders';
+import ToDoList from './Components/ToDoList';
 
 function App() {
   useEffect(() => {
@@ -44,8 +46,10 @@ function App() {
           <Route path="/add-care-record" element={<AddCareRecord />} />
           <Route path="/all-care-records" element={<CareRecordsTable />} />
           <Route path="/set-reminder" element={<ReminderForm />} />
+          <Route path="/missed-reminders" element={<MissedReminders />} />
           <Route path="/reminders" element={<Reminders />} />
           <Route path="/expenses" element={<ExpensesPage />} />
+          <Route path="/todo-list" element={<ToDoList />} />
           <Route path="/upcoming-reminders" element={<UpcomingReminders />} />
           <Route path="/edit-expense/:id" element={<EditExpense />} />
         </Routes>

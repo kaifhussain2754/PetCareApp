@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Dialog, DialogActions, DialogContent, DialogTitle, CssBaseline } from '@mui/material';
-import { createExpense } from '../../apiService'; // Adjust the import path as needed
+import { createExpense } from '../../services/apiService'; // Adjust the import path as needed
 import { useNavigate } from 'react-router-dom';
 
 const ExpenseForm = () => {
