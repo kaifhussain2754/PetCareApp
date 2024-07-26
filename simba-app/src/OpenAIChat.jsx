@@ -1,46 +1,48 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { TextField, Button, Typography, Box } from "@mui/material";
 
-const OpenAIChat = () => {
-  const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+function App() {
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      const res = await axios.post('/api/openai', { prompt: input });
-      setResponse(res.data.choices[0].text);
-    } catch (error) {
-      console.error('Error:', error);
-      setError('Failed to fetch response from OpenAI.');
-    } finally {
-      setLoading(false);
-    }
+
+    axios
+      .post("http://localhost:5000/chat", { prompt })
+      .then((res) => {
+        setResponse(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <div>
-        <strong>Response:</strong> {response}
-      </div>
-    </div>
-  );
-};
 
-export default OpenAIChat;
+  return (
+    <Box sx={{ p: 2 }}>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Prompt"
+          variant="outlined"
+          fullWidth
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          sx={{ mb: 2 }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </form>
+      {response && (
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6">Response:</Typography>
+          <Typography>{response}</Typography>
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+export default App;
