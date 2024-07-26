@@ -1,33 +1,18 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+// models/Reminder.js
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'simba-app'
+const Reminder = sequelize.define('Reminder', {
+  reminder_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  reminder_date_time: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+}, {
+  timestamps: false, // Disable `createdAt` and `updatedAt` fields
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Database connection failed:', err);
-    return;
-  }
-  console.log('Connected to the database');
-});
-
-const createReminder = (reminderData, callback) => {
-  const { reminder_name, reminder_date_time } = reminderData;
-  const query = 'INSERT INTO reminders (reminder_name, reminder_date_time) VALUES (?, ?)';
-  connection.query(query, [reminder_name, reminder_date_time], callback);
-};
-
-const getAllReminders = (callback) => {
-  const query = 'SELECT * FROM reminders';
-  connection.query(query, callback);
-};
-
-module.exports = {
-  createReminder,
-  getAllReminders
-};
+module.exports = Reminder;
