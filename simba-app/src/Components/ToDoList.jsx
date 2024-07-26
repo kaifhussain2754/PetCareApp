@@ -1,100 +1,194 @@
-import React, { useState, useEffect } from 'react';
-import { getTodos, createTodo } from '../api/todosApi'; // Adjust the import path as necessary
+import React, { useEffect, useState } from 'react';
+import { TextField, Button, Checkbox, FormControlLabel, Select, MenuItem } from '@mui/material';
+import { getTodos, createTodo, updateTodo, deleteTodo } from '../services/apiService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const ToDoList = () => {
-    const [todos, setTodos] = useState([]);
-    const [taskDescription, setTaskDescription] = useState('');
-    const [completed, setCompleted] = useState(false);
-    const [priority, setPriority] = useState('low'); // Default priority
-    const [error, setError] = useState(null);
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+  const [newTask, setNewTask] = useState('');
+  const [priority, setPriority] = useState('Low');
+  const [inputFocus, setInputFocus] = useState(false);
 
-    useEffect(() => {
-        const fetchTodos = async () => {
-            try {
-                const fetchedTodos = await getTodos();
-                setTodos(fetchedTodos);
-            } catch (err) {
-                setError('Error fetching todos');
-                console.error(err);
-            }
-        };
+  useEffect(() => {
+    loadTodos();
+  }, []);
 
-        fetchTodos();
-    }, []);
+  const loadTodos = async () => {
+    try {
+      const todos = await getTodos();
+      setTodos(todos);
+    } catch (error) {
+      console.error('Error loading todos:', error);
+    }
+  };
 
-    const handleCreateTodo = async (e) => {
-        e.preventDefault();
-        try {
-            const newTodo = {
-                task_description: taskDescription,
-                completed,
-                priority
-            };
-            await createTodo(newTodo);
-            setTodos(prevTodos => [...prevTodos, newTodo]);
-            setTaskDescription('');
-            setCompleted(false);
-            setPriority('low');
-        } catch (err) {
-            setError('Error creating todo');
-            console.error(err);
-        }
-    };
+  const handleAddTodo = async () => {
+    try {
+      const newTodo = { task_description: newTask, completed: false, priority };
+      await createTodo(newTodo);
+      setNewTask('');
+      setPriority('Low');
+      loadTodos();
+    } catch (error) {
+      console.error('Error adding todo:', error);
+    }
+  };
 
-    return (
-        <div>
-            <h1>ToDo List</h1>
-            {error && <p>{error}</p>}
-            <form onSubmit={handleCreateTodo}>
-                <div>
-                    <label>
-                        Task Description:
-                        <input
-                            type="text"
-                            value={taskDescription}
-                            onChange={(e) => setTaskDescription(e.target.value)}
-                            required
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Completed:
-                        <input
-                            type="checkbox"
-                            checked={completed}
-                            onChange={() => setCompleted(!completed)}
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Priority:
-                        <select
-                            value={priority}
-                            onChange={(e) => setPriority(e.target.value)}
-                        >
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </label>
-                </div>
-                <button type="submit">Add ToDo</button>
-            </form>
-            <ul>
-                {todos.map(todo => (
-                    <li key={todo.id}>
-                        <p>{todo.task_description}</p>
-                        <p>Completed: {todo.completed ? 'Yes' : 'No'}</p>
-                        <p>Priority: {todo.priority}</p>
-                        <p>Created At: {new Date(todo.created_at).toLocaleString()}</p>
-                        <p>Updated At: {new Date(todo.updated_at).toLocaleString()}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  const handleToggleComplete = async (id, completed) => {
+    try {
+      await updateTodo(id, { completed: !completed });
+      loadTodos();
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
+  };
+
+  const handleDeleteTodo = async (id) => {
+    try {
+      await deleteTodo(id);
+      loadTodos();
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
+  const sortedTodos = todos.sort((a, b) => {
+    // Sort by priority first (High > Medium > Low)
+    const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    }
+  
+    // If priorities are the same, sort by completion status
+    if (a.completed !== b.completed) {
+      return a.completed - b.completed;
+    }
+  
+    // Optionally, you can sort by creation date or any other criteria here
+    return 0;
+  });
+
+  return (
+    <div style={styles.container}>
+      <h1 style={styles.title}>Todo List</h1>
+      <div style={styles.formContainer}>
+        <TextField
+          label="New task"
+          variant="outlined"
+          fullWidth
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          style={{
+            ...styles.input,
+            borderColor: inputFocus ? '#ff6f61' : 'white',
+          }}
+          InputLabelProps={{ style: { color: '#ffffff' } }}
+          inputProps={{ style: { color: '#ffffff' } }}
+          onFocus={() => setInputFocus(true)}
+          onBlur={() => setInputFocus(false)}
+        />
+        <Select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          variant="outlined"
+          fullWidth
+          style={styles.select}
+          inputProps={{ style: { color: '#ffffff' } }}
+        >
+          <MenuItem value="" disabled>Select Priority</MenuItem>
+          <MenuItem value="Low">Low</MenuItem>
+          <MenuItem value="Medium">Medium</MenuItem>
+          <MenuItem value="High">High</MenuItem>
+        </Select>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#ff6f61', color: 'white' }}
+          onClick={handleAddTodo}
+          fullWidth
+        >
+          Add
+        </Button>
+      </div>
+      <ul style={styles.listGroup}>
+        {sortedTodos.map((todo) => (
+          <li key={todo.id} style={styles.listItem}>
+            <div style={styles.listItemContent}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={todo.completed}
+                    onChange={() => handleToggleComplete(todo.id, todo.completed)}
+                    style={{ color: '#ffffff' }}
+                  />
+                }
+                label={
+                  <span style={{ textDecoration: todo.completed ? 'line-through' : 'none', color: '#ffffff' }}>
+                    {todo.task_description} - <strong>{todo.priority}</strong>
+                  </span>
+                }
+              />
+            </div>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: 'red', color: 'white' }}
+              onClick={() => handleDeleteTodo(todo.id)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    maxWidth: '600px',
+    margin: '20px auto',
+    padding: '20px',
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '10px',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    color: 'white',
+    fontFamily: 'Arial, sans-serif',
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: '20px',
+  },
+  formContainer: {
+    marginBottom: '20px',
+  },
+  input: {
+    marginBottom: '10px',
+    borderColor: 'white',
+  },
+  select: {
+    marginBottom: '10px',
+    borderColor: 'white',
+  },
+  listGroup: {
+    listStyleType: 'none',
+    paddingLeft: '0',
+  },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px',
+    margin: '5px 0',
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '5px',
+  },
+  listItemContent: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 };
 
-export default ToDoList;
+export default TodoList;

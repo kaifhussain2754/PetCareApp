@@ -1,11 +1,12 @@
-const API_URL = 'http://localhost:5000/api/reminders';
+// src/services/apiService.js
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 const handleResponse = async (response) => {
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'Something went wrong');
   }
-  return response.json();
+  return response.json().catch(() => ({}));
 };
 
 export const getReminders = async () => {
@@ -59,7 +60,11 @@ export const updateReminder = async (id, reminder) => {
 export const deleteReminder = async (id) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    return handleResponse(response);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to delete reminder');
+    }
+    return response; // Return the raw response to check status in the frontend
   } catch (error) {
     console.error(`Error deleting reminder with id ${id}:`, error);
     throw error;

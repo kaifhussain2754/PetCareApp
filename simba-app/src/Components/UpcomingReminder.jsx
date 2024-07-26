@@ -76,12 +76,17 @@ function UpcomingReminders() {
 
   const handleDelete = async (id) => {
     try {
-      await deleteReminder(id);
-      setReminders(reminders.filter(reminder => reminder.id !== id));
+      const response = await deleteReminder(id);
+      if (response.ok) {
+        setReminders(reminders.filter(reminder => reminder.id !== id));
+      } else {
+        console.error('Failed to delete reminder:', response.statusText);
+      }
     } catch (error) {
       console.error('Error deleting reminder:', error);
     }
   };
+  
 
   const glassmorphismStyle = {
     background: 'rgba(255, 255, 255, 0.1)',

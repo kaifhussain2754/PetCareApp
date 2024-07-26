@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+/>
+
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is included
 import Header from './Components/Header'; // Adjust the import path as needed
 
@@ -16,6 +21,7 @@ import Reminders from './Components/Reminders';
 import ExpensesPage from './Components/ExpensesPage';
 import MissedReminders from './Components/MissedReminders';
 import ToDoList from './Components/ToDoList';
+import OpenAIChat from './OpenAIChat';
 
 function App() {
   useEffect(() => {
@@ -43,6 +49,7 @@ function App() {
           <Route path="/view-expenses" element={<ExpenseCalculator />} />
           <Route path="/care" element={<SimbaCare />} />
           <Route path="/expenseform" element={<AddExpenseForm />} />
+          <Route path="/chatbot" element={<OpenAIChat />} />
           <Route path="/add-care-record" element={<AddCareRecord />} />
           <Route path="/all-care-records" element={<CareRecordsTable />} />
           <Route path="/set-reminder" element={<ReminderForm />} />
