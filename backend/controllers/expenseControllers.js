@@ -1,67 +1,81 @@
-// backend/controllers/expenseController.js
 const Expense = require('../models/Expense');
 
-exports.getAllExpenses = (req, res) => {
-  console.log('Fetching all expenses');
-  Expense.getAll((err, results) => {
-    if (err) {
-      console.error('Error fetching all expenses:', err);
-      return res.status(500).send(err);
-    }
-    console.log('Expenses fetched:', results);
-    res.json(results);
-  });
+// Create a new expense
+const createExpense = async (req, res) => {
+  try {
+    const { expenseName, expenseDescription, expenseAmount, dateOfExpense } = req.body;
+    const expense = await Expense.create({
+      expenseName,
+      expenseDescription,
+      expenseAmount,
+      dateOfExpense,
+    });
+    res.status(201).json(expense);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-exports.getExpenseById = (req, res) => {
-  const id = req.params.id;
-  console.log(`Fetching expense with ID: ${id}`);
-  Expense.getById(id, (err, result) => {
-    if (err) {
-      console.error(`Error fetching expense with ID ${id}:`, err);
-      return res.status(500).send(err);
-    }
-    console.log(`Expense fetched with ID ${id}:`, result);
-    res.json(result);
-  });
+// Get all expenses
+const getAllExpenses = async (req, res) => {
+  try {
+    const expenses = await Expense.findAll();
+    res.status(200).json(expenses);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-exports.createExpense = (req, res) => {
-  const data = req.body;
-  console.log('Creating new expense with data:', data);
-  Expense.create(data, (err, result) => {
-    if (err) {
-      console.error('Error creating new expense:', err);
-      return res.status(500).send(err);
-    }
-    console.log('New expense created:', result);
-    res.json(result);
-  });
+// Get an expense by ID
+const getExpenseById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const expense = await Expense.findByPk(id);
+    if (!expense) return res.status(404).json({ error: 'Expense not found' });
+    res.status(200).json(expense);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-exports.updateExpense = (req, res) => {
-  const id = req.params.id;
-  const data = req.body;
-  console.log(`Updating expense with ID: ${id}, Data:`, data);
-  Expense.update(id, data, (err, result) => {
-    if (err) {
-      console.error(`Error updating expense with ID ${id}:`, err);
-      return res.status(500).send(err);
-    }
-    console.log(`Expense updated with ID ${id}:`, result);
-    res.json(result);
-  });
+// Update an expense
+const updateExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { expenseName, expenseDescription, expenseAmount, dateOfExpense } = req.body;
+    const [updated] = await Expense.update({
+      expenseName,
+      expenseDescription,
+      expenseAmount,
+      dateOfExpense,
+    }, {
+      where: { id },
+    });
+    if (!updated) return res.status(404).json({ error: 'Expense not found' });
+    res.status(200).json({ message: 'Expense updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-exports.deleteExpense = (req, res) => {
-  const id = req.params.id;
-  console.log(`Deleting expense with ID: ${id}`);
-  Expense.delete(id, (err, result) => {
-    if (err) {
-      console.error(`Error deleting expense with ID ${id}:`, err);
-      return res.status(500).send(err);
-    }
-    console.log(`Expense deleted with ID ${id}:`, result);
-    res.json(result);
-  });
+// Delete an expense
+const deleteExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Expense.destroy({
+      where: { id },
+    });
+    if (!deleted) return res.status(404).json({ error: 'Expense not found' });
+    res.status(200).json({ message: 'Expense deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createExpense,
+  getAllExpenses,
+  getExpenseById,
+  updateExpense,
+  deleteExpense,
 };

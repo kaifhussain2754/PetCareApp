@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2024 at 12:20 PM
+-- Generation Time: Jul 26, 2024 at 11:39 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -86,8 +86,7 @@ CREATE TABLE `care_records` (
 --
 
 INSERT INTO `care_records` (`id`, `name`, `location`, `notes`, `timestamp`) VALUES
-(17, '', '', '', '2024-07-25 15:34:59'),
-(18, '', '', '', '2024-07-25 15:35:17');
+(19, 'Deworming Medicine', 'Home', '1 Medicine Wasted, 1 given using syringe', '2024-07-26 15:34:01');
 
 -- --------------------------------------------------------
 
@@ -108,7 +107,31 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `expenseName`, `expenseDescription`, `expenseAmount`, `dateOfExpense`) VALUES
-(11, 'Dry Food', 'GrainZero Dry Food', '780.00', '2024-07-24');
+(14, 'SIMBA Purchase', 'Made a purchase of simba himselft from al wasi collection', '5500.00', '2024-04-27'),
+(15, 'Litter and Scoop', 'Purchased Drools litter and scoop', '550.00', '2024-04-27'),
+(16, 'Drools Dry Food', 'Drools Dry food of ocean fish flavour', '700.00', '2024-04-28'),
+(17, 'Basket', 'Travel basket for simba', '150.00', '2024-05-01'),
+(18, 'Ear Cleaning Liquid', 'Purchased ear cleaning liquid', '190.00', '2024-07-27'),
+(19, 'Shampoo', 'Himalaya Erina-EP Shampoo', '250.00', '2024-07-27'),
+(20, 'Whiskas Wet Food', 'Overall Wet food till date', '2500.00', '2024-07-27'),
+(21, 'Creamy Treat', 'GrainZero Creamy Treats till date', '1500.00', '2024-07-27'),
+(22, 'Dry Treat', 'Temptation dry treat till date', '300.00', '2024-07-27'),
+(23, 'Grainzero dry food', 'Purchased Grainzero dry food', '740.00', '2024-07-27'),
+(24, 'Toy', 'Feather toy', '200.00', '2024-07-27'),
+(25, 'Wet Wipes', 'Wet wipes from flipkart', '194.00', '2024-07-27'),
+(26, 'Nail Cutter', 'Nail Cutter', '149.00', '2024-07-27'),
+(27, 'Comb', 'Blue Comb', '149.00', '2024-07-27'),
+(28, 'Comb', 'Steel Comb', '100.00', '2024-07-27'),
+(29, 'Powder', 'anti infection powder', '200.00', '2024-07-27'),
+(30, 'Collar', 'blue neck collar with ring', '40.00', '2024-07-27'),
+(31, 'Litter', 'Pet Pattern litter non scented', '549.00', '2024-07-27'),
+(32, 'Litter', 'Pet Pattern litter scented', '649.00', '2024-07-27'),
+(33, 'Roller', 'Hair Removal roller', '153.00', '2024-07-27'),
+(34, 'Deworming Medicine', 'Deworming Medicine 4 tablets', '270.00', '2024-07-27'),
+(35, 'Chicken', 'Raw chicken till date', '2500.00', '2024-07-27'),
+(36, 'Grooming', 'Removed Mattes', '100.00', '2024-07-26'),
+(37, 'bowl', 'Steel Bowl', '100.00', '2024-07-26'),
+(38, 'Bowl', 'Other plastic bowls', '100.00', '2024-07-26');
 
 -- --------------------------------------------------------
 
@@ -121,6 +144,15 @@ CREATE TABLE `reminders` (
   `reminder_name` varchar(255) NOT NULL,
   `reminder_date_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reminders`
+--
+
+INSERT INTO `reminders` (`id`, `reminder_name`, `reminder_date_time`) VALUES
+(27, 'Deworming Medicine', '2024-10-06 02:30:00'),
+(28, 'Tricat Trio Vaccine', '2025-10-01 04:30:00'),
+(29, 'Powder Tail', '2024-07-27 12:30:00');
 
 -- --------------------------------------------------------
 
@@ -142,9 +174,9 @@ CREATE TABLE `todolist` (
 --
 
 INSERT INTO `todolist` (`id`, `task_description`, `completed`, `priority`, `created_at`, `updated_at`) VALUES
-(22, 'Buying Whiskas Wet Food', 0, 'medium', '2024-07-25 19:56:26', '2024-07-25 19:56:50'),
-(23, 'Pet Pattern Cat Litter', 1, 'high', '2024-07-25 19:56:41', '2024-07-25 19:56:51'),
-(24, 'Buying Temptation Treat', 0, 'high', '2024-07-25 19:57:08', '2024-07-25 19:57:08');
+(22, 'Buying Whiskas Wet Food', 0, 'medium', '2024-07-25 19:56:26', '2024-07-26 19:33:32'),
+(23, 'Pet Pattern Cat Litter', 0, 'high', '2024-07-25 19:56:41', '2024-07-26 19:33:32'),
+(24, 'Buying Temptation Treat', 1, 'high', '2024-07-25 19:57:08', '2024-07-26 19:33:31');
 
 --
 -- Indexes for dumped tables
@@ -207,19 +239,19 @@ ALTER TABLE `carerecords`
 -- AUTO_INCREMENT for table `care_records`
 --
 ALTER TABLE `care_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `reminders`
 --
 ALTER TABLE `reminders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `todolist`

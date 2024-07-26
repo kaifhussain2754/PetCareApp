@@ -7,19 +7,20 @@ const expenseRoutes = require('./routes/expenseRoutes');
 const careRoutes = require('./routes/careRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
 const todoRoutes = require('./routes/todoRoutes');
-const { OpenAI } = require('openai'); // Import OpenAI
+const { OpenAI } = require('openai');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
+// Use route files for different resources
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/care-records', careRoutes);
 app.use('/api/reminders', reminderRoutes);
 app.use('/api/todos', todoRoutes);
 
-// Initialize the OpenAI client
+// Set up OpenAI API endpoint
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -27,7 +28,7 @@ const openai = new OpenAI({
 app.post('/chat', async (req, res) => {
   try {
     const response = await openai.completions.create({
-      model: "text-davinci-003",  // Use the model you prefer
+      model: "gpt-4",
       prompt: req.body.prompt,
       max_tokens: 100,
     });
@@ -38,17 +39,14 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log('Server is running on port 5000');
-});
+const PORT = process.env.PORT || 5000;
 
 sequelize.sync().then(() => {
   console.log('Database & tables created!');
-  
-  const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 }).catch(err => {
   console.error('Unable to connect to the database:', err);
+  process.exit(1); // Exit the process if the database connection fails
 });

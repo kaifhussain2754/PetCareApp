@@ -61,7 +61,6 @@ const EditExpense = () => {
   return (
     <Box 
       sx={{ 
-        // minHeight: '100vh', 
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
@@ -181,38 +180,38 @@ const EditExpense = () => {
             }}
           />
           <TextField
-      fullWidth
-      variant="filled"
-      margin="normal"
-      id="dateOfExpense"
-      name="dateOfExpense"
-      label="Date of Expense"
-      type="date"
-      value={expense.dateOfExpense}
-      onChange={handleChange}
-      InputLabelProps={{ shrink: true }} // Keeps the label visible when not focused
-      inputProps={{ placeholder: "" }} // Attempt to set placeholder (may not be visible)
-      sx={{ 
-        backgroundColor: 'rgba(255, 255, 255, 0.1)', 
-        color: '#f6e3e4', 
-        marginBottom: 2, 
-        borderRadius: 2,
-        '& .MuiInputBase-input': { color: '#f6e3e4' },
-        '& .MuiInputLabel-root': { color: '#f6e3e4' },
-        '& .MuiFilledInput-root': {
-          borderRadius: 2,
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          '&:before': { borderBottom: 'none' }, // Removes default underline
-          '&:hover:before': { borderBottom: 'none' }, // Removes underline on hover
-          '&.Mui-focused:after': {
-            borderBottom: `2px solid #ff6f61` // Custom border color on focus
-          },
-          '&.Mui-focused .MuiInputLabel-root': {
-            color: '#ff6f61' // Custom label color on focus
-          }
-        },
-      }}
-    />
+            fullWidth
+            variant="filled"
+            margin="normal"
+            id="dateOfExpense"
+            name="dateOfExpense"
+            label="Date of Expense"
+            type="date"
+            value={expense.dateOfExpense}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ placeholder: "" }}
+            sx={{ 
+              backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+              color: '#f6e3e4', 
+              marginBottom: 2, 
+              borderRadius: 2,
+              '& .MuiInputBase-input': { color: '#f6e3e4' },
+              '& .MuiInputLabel-root': { color: '#f6e3e4' },
+              '& .MuiFilledInput-root': {
+                borderRadius: 2,
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                '&:before': { borderBottom: 'none' },
+                '&:hover:before': { borderBottom: 'none' },
+                '&.Mui-focused:after': {
+                  borderBottom: `2px solid #ff6f61`
+                },
+                '&.Mui-focused .MuiInputLabel-root': {
+                  color: '#ff6f61'
+                }
+              },
+            }}
+          />
           <Button
             type="submit"
             fullWidth

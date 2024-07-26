@@ -21,6 +21,7 @@ const ExpenseCalculator = () => {
         const response = await getExpenses(); // Use the API service function
         let fetchedExpenses = response;
 
+        // Filter expenses based on the selected period
         if (period === 'monthly' && filter) {
           const [year, month] = filter.split('-');
           fetchedExpenses = fetchedExpenses.filter(expense => {
@@ -128,9 +129,6 @@ const ExpenseCalculator = () => {
         textAlign: 'center',
         fontWeight: 'bold',
         marginBottom: '20px',
-        background: '#ff6f61',
-        padding: '5px',
-        borderRadius: '1rem'
       }}>
         Expense History
       </Typography>
@@ -177,35 +175,37 @@ const ExpenseCalculator = () => {
           InputLabelProps={{ style: { color: '#ff6f61' } }}
         />
       </div>
-      <TableContainer style={{
+      <TableContainer className="custom-scrollbar" style={{
         background: 'rgba(255, 255, 255, 0.1)',
         borderRadius: '15px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
         backdropFilter: 'blur(10px)',
         color: '#fff',
         marginTop: '20px',
+        maxHeight: '400px', // Adjust this value as needed
+        overflowY: 'auto',  // Enable vertical scrolling
       }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ color: '#fff' }}>SrNo</TableCell>
-              <TableCell style={{ color: '#fff' }}>Expense Name</TableCell>
-              <TableCell style={{ color: '#fff' }}>Expense Description</TableCell>
-              <TableCell style={{ color: '#fff' }}>Expense Amount</TableCell>
-              <TableCell style={{ color: '#fff' }}>Date of Expense</TableCell>
-              <TableCell style={{ color: '#fff' }}>Actions</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>SrNo</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>Expense Name</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>Expense Description</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>Expense Amount</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>Date of Expense</TableCell>
+              <TableCell style={{ color: '#fff', fontWeight: 'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {expenses.length > 0 ? (
               expenses.map((expense, index) => (
                 <TableRow key={expense.id}>
-                  <TableCell style={{ color: '#fff' }}>{index + 1}</TableCell>
-                  <TableCell style={{ color: '#fff' }}>{expense.expenseName}</TableCell>
-                  <TableCell style={{ color: '#fff' }}>{expense.expenseDescription}</TableCell>
-                  <TableCell style={{ color: '#fff' }}>{expense.expenseAmount}</TableCell>
-                  <TableCell style={{ color: '#fff' }}>{formatDate(expense.dateOfExpense)}</TableCell>
-                  <TableCell>
+                  <TableCell style={{ color: '#fff', padding: '10px', verticalAlign: 'middle' }}>{index + 1}</TableCell>
+                  <TableCell style={{ color: '#fff', padding: '10px', verticalAlign: 'middle' }}>{expense.expenseName}</TableCell>
+                  <TableCell style={{ color: '#fff', padding: '10px', verticalAlign: 'middle' }}>{expense.expenseDescription}</TableCell>
+                  <TableCell style={{ color: '#fff', padding: '10px', verticalAlign: 'middle' }}>{expense.expenseAmount}</TableCell>
+                  <TableCell style={{ color: '#fff', padding: '10px', verticalAlign: 'middle' }}>{formatDate(expense.dateOfExpense)}</TableCell>
+                  <TableCell style={{ padding: '10px', verticalAlign: 'middle' }}>
                     <Button
                       variant="contained"
                       color="warning"
@@ -227,7 +227,7 @@ const ExpenseCalculator = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} style={{ textAlign: 'center', color: '#fff' }}>
+                <TableCell colSpan={6} style={{ textAlign: 'center', color: '#fff', padding: '20px' }}>
                   No expenses found
                 </TableCell>
               </TableRow>

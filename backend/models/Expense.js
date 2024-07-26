@@ -1,22 +1,31 @@
-// backend/models/Expense.js
-const db = require('../config/db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db'); // Import the sequelize instance
 
-const Expense = {
-  getAll: (callback) => {
-    db.query('SELECT * FROM expenses', callback);
+const Expense = sequelize.define('Expense', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
   },
-  getById: (id, callback) => {
-    db.query('SELECT * FROM expenses WHERE id = ?', [id], callback);
+  expenseName: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
-  create: (data, callback) => {
-    db.query('INSERT INTO expenses SET ?', data, callback);
+  expenseDescription: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
-  update: (id, data, callback) => {
-    db.query('UPDATE expenses SET ? WHERE id = ?', [data, id], callback);
+  expenseAmount: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
   },
-  delete: (id, callback) => {
-    db.query('DELETE FROM expenses WHERE id = ?', [id], callback);
+  dateOfExpense: {
+    type: DataTypes.DATE,
+    allowNull: false,
   },
-};
+}, {
+  tableName: 'expenses',
+  timestamps: false, // Set to true if you want Sequelize to manage `createdAt` and `updatedAt` fields
+});
 
 module.exports = Expense;

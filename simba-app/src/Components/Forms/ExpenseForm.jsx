@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Dialog, DialogActions, DialogContent, DialogTitle, CssBaseline } from '@mui/material';
-import { createExpense } from '../../services/apiService'; // Adjust the import path as needed
+import { addExpense } from '../../services/apiService'; // Adjust the import path as needed
 import { useNavigate } from 'react-router-dom';
 
 const ExpenseForm = () => {
@@ -29,7 +29,7 @@ const ExpenseForm = () => {
       dateOfExpense: currentDate,
     };
     try {
-      const result = await createExpense(dataWithDate);
+      await addExpense(dataWithDate);
       setDialogMessage('Expense added successfully!');
     } catch (error) {
       setDialogMessage('Error adding expense. Please try again.');
@@ -39,7 +39,7 @@ const ExpenseForm = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-    navigate('/'); // Redirect or handle navigation after closing the dialog
+    navigate('/view-expenses'); // Redirect or handle navigation after closing the dialog
   };
 
   return (

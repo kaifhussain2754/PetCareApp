@@ -1,67 +1,55 @@
-const API_URL = 'http://localhost:5000/api/expenses';
+// src/api/expenseApi.js
+import axios from 'axios';
 
-const handleResponse = async (response) => {
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Something went wrong');
-  }
-  return response.json();
-};
+// Get the base URL from the environment variable
+const API_URL = import.meta.env.VITE_APP_API_EXPENSE_URL;
 
 export const getExpenses = async () => {
   try {
-    const response = await fetch(API_URL);
-    return handleResponse(response);
+    const response = await axios.get(API_URL); // Full URL includes the endpoint path
+    return response.data;
   } catch (error) {
     console.error('Error fetching expenses:', error);
     throw error;
   }
 };
 
-export const getExpenseById = async (id) => {
+export const addExpense = async (expense) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
-    return handleResponse(response);
+    const response = await axios.post(API_URL, expense); // Full URL includes the endpoint path
+    return response.data;
   } catch (error) {
-    console.error(`Error fetching expense with id ${id}:`, error);
+    console.error('Error adding expense:', error);
     throw error;
   }
 };
 
-export const createExpense = async (expense) => {
+export const updateExpense = async (id, updatedExpense) => {
   try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(expense),
-    });
-    return handleResponse(response);
+    const response = await axios.put(`${API_URL}/${id}`, updatedExpense); // Append the ID to the URL
+    return response.data;
   } catch (error) {
-    console.error('Error creating expense:', error);
-    throw error;
-  }
-};
-
-export const updateExpense = async (id, expense) => {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(expense),
-    });
-    return handleResponse(response);
-  } catch (error) {
-    console.error(`Error updating expense with id ${id}:`, error);
+    console.error('Error updating expense:', error);
     throw error;
   }
 };
 
 export const deleteExpense = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    return handleResponse(response);
+    const response = await axios.delete(`${API_URL}/${id}`); // Append the ID to the URL
+    return response.data;
   } catch (error) {
-    console.error(`Error deleting expense with id ${id}:`, error);
+    console.error('Error deleting expense:', error);
+    throw error;
+  }
+};
+
+export const getExpenseById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/${id}`); // Append the ID to the URL
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching expense by ID:', error);
     throw error;
   }
 };
