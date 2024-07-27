@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 27, 2024 at 04:19 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Jul 27, 2024 at 05:35 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `admins` (
   `password` varchar(255) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admins`
@@ -57,7 +57,7 @@ CREATE TABLE `carerecords` (
   `timestamp` datetime NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `carerecords`
@@ -79,7 +79,7 @@ CREATE TABLE `care_records` (
   `location` varchar(255) NOT NULL,
   `notes` text DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `care_records`
@@ -100,39 +100,39 @@ CREATE TABLE `expenses` (
   `expenseDescription` text DEFAULT NULL,
   `expenseAmount` decimal(10,2) NOT NULL,
   `dateOfExpense` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `expenses`
 --
 
 INSERT INTO `expenses` (`id`, `expenseName`, `expenseDescription`, `expenseAmount`, `dateOfExpense`) VALUES
-(14, 'SIMBA Purchase', 'Made a purchase of simba himselft from al wasi collection', 5500.00, '2024-04-27'),
-(15, 'Litter and Scoop', 'Purchased Drools litter and scoop', 550.00, '2024-04-27'),
-(16, 'Drools Dry Food', 'Drools Dry food of ocean fish flavour', 700.00, '2024-04-28'),
-(17, 'Basket', 'Travel basket for simba', 150.00, '2024-05-01'),
-(18, 'Ear Cleaning Liquid', 'Purchased ear cleaning liquid', 190.00, '2024-07-27'),
-(19, 'Shampoo', 'Himalaya Erina-EP Shampoo', 250.00, '2024-07-27'),
-(20, 'Whiskas Wet Food', 'Overall Wet food till date', 2500.00, '2024-07-27'),
-(21, 'Creamy Treat', 'GrainZero Creamy Treats till date', 1500.00, '2024-07-27'),
-(22, 'Dry Treat', 'Temptation dry treat till date', 300.00, '2024-07-27'),
-(23, 'Grainzero dry food', 'Purchased Grainzero dry food', 740.00, '2024-07-27'),
-(24, 'Toy', 'Feather toy', 200.00, '2024-07-27'),
-(25, 'Wet Wipes', 'Wet wipes from flipkart', 194.00, '2024-07-27'),
-(26, 'Nail Cutter', 'Nail Cutter', 149.00, '2024-07-27'),
-(27, 'Comb', 'Blue Comb', 149.00, '2024-07-27'),
-(28, 'Comb', 'Steel Comb', 100.00, '2024-07-27'),
-(29, 'Powder', 'anti infection powder', 200.00, '2024-07-27'),
-(30, 'Collar', 'blue neck collar with ring', 40.00, '2024-07-27'),
-(31, 'Litter', 'Pet Pattern litter non scented', 549.00, '2024-07-27'),
-(32, 'Litter', 'Pet Pattern litter scented', 649.00, '2024-07-27'),
-(33, 'Roller', 'Hair Removal roller', 153.00, '2024-07-27'),
-(34, 'Deworming Medicine', 'Deworming Medicine 4 tablets', 270.00, '2024-07-27'),
-(35, 'Chicken', 'Raw chicken till date', 2500.00, '2024-07-27'),
-(36, 'Grooming', 'Removed Mattes', 100.00, '2024-07-26'),
-(37, 'bowl', 'Steel Bowl', 100.00, '2024-07-26'),
-(38, 'Bowl', 'Other plastic bowls', 100.00, '2024-07-26'),
-(39, 'Litter', 'Local Litter unscented', 300.00, '2024-07-27');
+(14, 'SIMBA Purchase', 'Made a purchase of simba himselft from al wasi collection', '5500.00', '2024-04-27'),
+(15, 'Litter and Scoop', 'Purchased Drools litter and scoop', '550.00', '2024-04-27'),
+(16, 'Drools Dry Food', 'Drools Dry food of ocean fish flavour', '700.00', '2024-04-28'),
+(17, 'Basket', 'Travel basket for simba', '150.00', '2024-05-01'),
+(18, 'Ear Cleaning Liquid', 'Purchased ear cleaning liquid', '190.00', '2024-07-27'),
+(19, 'Shampoo', 'Himalaya Erina-EP Shampoo', '250.00', '2024-07-27'),
+(20, 'Whiskas Wet Food', 'Overall Wet food till date', '2500.00', '2024-07-27'),
+(21, 'Creamy Treat', 'GrainZero Creamy Treats till date', '1500.00', '2024-07-27'),
+(22, 'Dry Treat', 'Temptation dry treat till date', '300.00', '2024-07-27'),
+(23, 'Grainzero dry food', 'Purchased Grainzero dry food', '740.00', '2024-07-27'),
+(24, 'Toy', 'Feather toy', '200.00', '2024-07-27'),
+(25, 'Wet Wipes', 'Wet wipes from flipkart', '194.00', '2024-07-27'),
+(26, 'Nail Cutter', 'Nail Cutter', '149.00', '2024-07-27'),
+(27, 'Comb', 'Blue Comb', '149.00', '2024-07-27'),
+(28, 'Comb', 'Steel Comb', '100.00', '2024-07-27'),
+(29, 'Powder', 'anti infection powder', '200.00', '2024-07-27'),
+(30, 'Collar', 'blue neck collar with ring', '40.00', '2024-07-27'),
+(31, 'Litter', 'Pet Pattern litter non scented', '549.00', '2024-07-27'),
+(32, 'Litter', 'Pet Pattern litter scented', '649.00', '2024-07-27'),
+(33, 'Roller', 'Hair Removal roller', '153.00', '2024-07-27'),
+(34, 'Deworming Medicine', 'Deworming Medicine 4 tablets', '270.00', '2024-07-27'),
+(35, 'Chicken', 'Raw chicken till date', '2500.00', '2024-07-27'),
+(36, 'Grooming', 'Removed Mattes', '100.00', '2024-07-26'),
+(37, 'bowl', 'Steel Bowl', '100.00', '2024-07-26'),
+(38, 'Bowl', 'Other plastic bowls', '100.00', '2024-07-26'),
+(39, 'Litter', 'Local Litter unscented', '300.00', '2024-07-27');
 
 -- --------------------------------------------------------
 
@@ -144,7 +144,7 @@ CREATE TABLE `reminders` (
   `id` int(11) NOT NULL,
   `reminder_name` varchar(255) NOT NULL,
   `reminder_date_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reminders`
@@ -168,7 +168,7 @@ CREATE TABLE `todolist` (
   `priority` enum('low','medium','high') DEFAULT 'medium',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `todolist`
@@ -181,25 +181,24 @@ INSERT INTO `todolist` (`id`, `task_description`, `completed`, `priority`, `crea
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `petName` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `Users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `Users` (`id`, `username`, `password`, `createdAt`, `updatedAt`, `petName`) VALUES
-(9, 'test', '$2a$10$nG47O7yRX1QhymEyHAw4Kuu9C/JA6hoLu6/5gqg7dVIzTpBfg8Xae', '2024-07-27 12:48:17', '2024-07-27 12:48:17', NULL),
-(10, 'test2', '$2a$10$RlXyfOXkoyQ2PO8ag2rXiOoFkuPcjHg4j0usW4q1.ua0w6rqcu9Sa', '2024-07-27 13:29:01', '2024-07-27 13:29:01', 'simba');
+INSERT INTO `users` (`id`, `username`, `password`, `createdAt`, `updatedAt`, `petName`) VALUES
+(11, 'adminSimba', '$2a$10$uYCXGmMbKInv1TxFowxCWuDxR7DccfpNyPmyvcherLBmu8l1RF9le', '2024-07-27 15:05:52', '2024-07-27 15:05:52', 'simba');
 
 --
 -- Indexes for dumped tables
@@ -243,9 +242,9 @@ ALTER TABLE `todolist`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Users`
+-- Indexes for table `users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
@@ -290,10 +289,10 @@ ALTER TABLE `todolist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
