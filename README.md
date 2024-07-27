@@ -89,4 +89,10 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 Feel free to adjust any sections or add more details specific to your project.
-```
+
+<img width="1470" alt="Screenshot 2024-07-27 at 5 11 37 PM" src="https://github.com/user-attachments/assets/f6c433f5-70df-4845-9a14-963eed3c26d2">
+<img width="1470" alt="Screenshot 2024-07-27 at 5 13 19 PM" src="https://github.com/user-attachments/assets/aad14e97-afa9-4090-a08e-fa4a9182530a">
+<img width="1470" alt="Screenshot 2024-07-27 at 5 13 49 PM" src="https://github.com/user-attachments/assets/4dbb0602-4c6d-4ec2-b2de-938f0292ab52">
+<img width="1470" alt="Screenshot 2024-07-27 at 5 14 16 PM" src="https://github.com/user-attachments/assets/e63fcc0a-d205-43c4-8578-a12aedeb9d04">
+
+
