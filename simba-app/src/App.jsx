@@ -61,7 +61,7 @@ function App() {
               <Route path="/reminders" element={<PrivateRoute element={<Reminders />} />} />
               <Route path="/expenses" element={<PrivateRoute element={<ExpensesPage />} />} />
               <Route path="/todo-list" element={<PrivateRoute element={<ToDoList />} />} />
-              <Route path="/upcoming_reminders" element={<PrivateRoute element={<UpcomingReminders />} />} />
+              <Route path="/upcoming-reminders" element={<PrivateRoute element={<UpcomingReminders />} />} />
               <Route path="/edit-expense/:id" element={<PrivateRoute element={<EditExpense />} />} />
             </Routes>
           </div>

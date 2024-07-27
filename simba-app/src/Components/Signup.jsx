@@ -1,67 +1,48 @@
+// src/Components/Signup.jsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // For navigation after successful signup
 
-function Signup() {
+const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // To show loading state
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const [petName, setPetName] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', { username, password });
-      
-      // Redirect to login page or dashboard on success
-      navigate('/login');
+      await axios.post('http://localhost:5000/api/auth/signup', { username, password, petName });
+      // Handle successful signup
     } catch (error) {
-      console.error('Signup failed:', error);
-      setError(error.response?.data?.message || 'Signup failed. Please try again.');
-    } finally {
-      setLoading(false);
+      // Handle signup error
     }
   };
 
   return (
-    <div className="container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            className="form-control"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Signing Up...' : 'Sign Up'}
-        </button>
-        {error && <p className="text-danger mt-2">{error}</p>}
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+        required
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        required
+      />
+      <input
+        type="text"
+        value={petName}
+        onChange={(e) => setPetName(e.target.value)}
+        placeholder="Pet Name"
+      />
+      <button type="submit">Signup</button>
+    </form>
   );
-}
+};
 
 export default Signup;
