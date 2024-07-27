@@ -7,6 +7,7 @@ const expenseRoutes = require('./routes/expenseRoutes');
 const careRoutes = require('./routes/careRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
 const todoRoutes = require('./routes/todoRoutes');
+const authRoutes = require('./routes/auth');
 const { OpenAI } = require('openai');
 
 const app = express();
@@ -19,6 +20,7 @@ app.use('/api/expenses', expenseRoutes);
 app.use('/api/care-records', careRoutes);
 app.use('/api/reminders', reminderRoutes);
 app.use('/api/todos', todoRoutes);
+app.use('/api/auth', authRoutes);
 
 // Set up OpenAI API endpoint
 const openai = new OpenAI({
