@@ -186,7 +186,7 @@ const AddCareRecord = () => {
         <Button
           variant="outlined"
           color="inherit"
-          onClick={() => navigate('/care')}
+          onClick={() => navigate(-1)}
           sx={{ mt: 2, borderRadius: 2, borderColor: '#ff6f61' }}
         >
           <FontAwesomeIcon icon={faArrowLeft} /> Back

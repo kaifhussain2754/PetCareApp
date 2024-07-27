@@ -23,8 +23,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCog, faSignOutAlt, faCalendarDay, faTasks, faComments } from '@fortawesome/free-solid-svg-icons';
-import { faDollarSign, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCog, faSignOutAlt, faCalendarDay, faTasks, faComments, faDollarSign, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 const images = {
   expense: '/expense.png', // Replace with actual image paths
@@ -38,7 +37,6 @@ const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // Use default breakpoints
   const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md breakpoint is 960px
 
   const toggleDrawer = (open) => () => {
@@ -56,11 +54,13 @@ const Header = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="sticky" // Set position to sticky
         style={{
           background: '#1c1c1c',
           padding: '10px 0',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          top: 0, // Ensure it stays at the top
+          zIndex: 1200, // Ensure it's above other content
         }}
       >
         <Toolbar>
@@ -102,7 +102,19 @@ const Header = () => {
               </IconButton>
             ) : (
               <div style={{ display: 'flex', alignItems: 'center' }}>
-
+                <Button
+                  component={Link}
+                  to="/"
+                  variant="text"
+                  style={{
+                    color: '#fff',
+                    marginRight: '15px',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  <FontAwesomeIcon icon={faHome} style={{ marginRight: '10px' }} />
+                  Home
+                </Button>
                 <Button
                   aria-controls="navigate-menu"
                   aria-haspopup="true"
@@ -127,7 +139,7 @@ const Header = () => {
                     style: {
                       backgroundColor: '#1c1c1c',
                       color: '#fff',
-                      width: '900px',
+                      width: '1200px', // Increased width
                       padding: '20px',
                       borderRadius: '8px',
                     },
@@ -136,7 +148,12 @@ const Header = () => {
                   <Grid container spacing={2}>
                     {/* Expense Section */}
                     <Grid item xs={12} sm={4}>
-                      <MuiTypography variant="subtitle1" style={{ padding: '8px 16px', color: '#ddd' }}>
+                      <MuiTypography
+                        variant="subtitle1"
+                        component={Link}
+                        to="/expenses"
+                        style={{ padding: '8px 16px', color: '#ddd', textDecoration: 'none' }}
+                      >
                         Expense
                       </MuiTypography>
                       <Divider style={{ backgroundColor: '#444', margin: '8px 0' }} />
@@ -151,30 +168,27 @@ const Header = () => {
                               <FontAwesomeIcon icon={faDollarSign} style={{ marginRight: '10px' }} />
                               Add Expense
                             </MenuItem>
-                            <MenuItem onClick={handleMenuClose} component={Link} to="/edit-expense/:id">
-                              <FontAwesomeIcon icon={faDollarSign} style={{ marginRight: '10px' }} />
-                              Edit Expense
-                            </MenuItem>
                           </MenuList>
                         </Grid>
-                        <Grid item xs={4}>
-                          <img src={images.expense} alt="Expense" style={{ width: '100%', borderRadius: '8px' }} />
+                        <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                          <img src={images.expense} alt="Expense" style={{ width: '180px', borderRadius: '8px' }} />
                         </Grid>
                       </Grid>
                     </Grid>
                     {/* Care Section */}
                     <Grid item xs={12} sm={4}>
-                      <MuiTypography variant="subtitle1" style={{ padding: '8px 16px', color: '#ddd' }}>
+                      <MuiTypography
+                        variant="subtitle1"
+                        component={Link}
+                        to="/care"
+                        style={{ padding: '8px 16px', color: '#ddd', textDecoration: 'none' }}
+                      >
                         Care
                       </MuiTypography>
                       <Divider style={{ backgroundColor: '#444', margin: '8px 0' }} />
                       <Grid container spacing={1} alignItems="center">
                         <Grid item xs={8}>
                           <MenuList>
-                            <MenuItem onClick={handleMenuClose} component={Link} to="/care">
-                              <FontAwesomeIcon icon={faUserCircle} style={{ marginRight: '10px' }} />
-                              Care
-                            </MenuItem>
                             <MenuItem onClick={handleMenuClose} component={Link} to="/add-care-record">
                               <FontAwesomeIcon icon={faUserCircle} style={{ marginRight: '10px' }} />
                               Add Care Record
@@ -185,14 +199,19 @@ const Header = () => {
                             </MenuItem>
                           </MenuList>
                         </Grid>
-                        <Grid item xs={4}>
-                          <img src={images.care} alt="Care" style={{ width: '100%', borderRadius: '8px' }} />
+                        <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                          <img src={images.care} alt="Care" style={{ width: '180px', borderRadius: '8px' }} />
                         </Grid>
                       </Grid>
                     </Grid>
                     {/* Reminder Section */}
                     <Grid item xs={12} sm={4}>
-                      <MuiTypography variant="subtitle1" style={{ padding: '8px 16px', color: '#ddd' }}>
+                      <MuiTypography
+                        variant="subtitle1"
+                        component={Link}
+                        to="/reminders"
+                        style={{ padding: '8px 16px', color: '#ddd', textDecoration: 'none' }}
+                      >
                         Reminder
                       </MuiTypography>
                       <Divider style={{ backgroundColor: '#444', margin: '8px 0' }} />
@@ -207,24 +226,25 @@ const Header = () => {
                               <FontAwesomeIcon icon={faCalendarDay} style={{ marginRight: '10px' }} />
                               Missed Reminders
                             </MenuItem>
-                            <MenuItem onClick={handleMenuClose} component={Link} to="/reminders">
-                              <FontAwesomeIcon icon={faCalendarDay} style={{ marginRight: '10px' }} />
-                              Reminders
-                            </MenuItem>
                             <MenuItem onClick={handleMenuClose} component={Link} to="/upcoming-reminders">
                               <FontAwesomeIcon icon={faCalendarDay} style={{ marginRight: '10px' }} />
                               Upcoming Reminders
                             </MenuItem>
                           </MenuList>
                         </Grid>
-                        <Grid item xs={4}>
-                          <img src={images.reminder} alt="Reminder" style={{ width: '100%', borderRadius: '8px' }} />
+                        <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                          <img src={images.reminder} alt="Reminder" style={{ width: '180px', borderRadius: '8px' }} />
                         </Grid>
                       </Grid>
                     </Grid>
                     {/* ToDo List Section */}
                     <Grid item xs={12} sm={4}>
-                      <MuiTypography variant="subtitle1" style={{ padding: '8px 16px', color: '#ddd' }}>
+                      <MuiTypography
+                        variant="subtitle1"
+                        component={Link}
+                        to="/todo-list"
+                        style={{ padding: '8px 16px', color: '#ddd', textDecoration: 'none' }}
+                      >
                         ToDo List
                       </MuiTypography>
                       <Divider style={{ backgroundColor: '#444', margin: '8px 0' }} />
@@ -237,14 +257,19 @@ const Header = () => {
                             </MenuItem>
                           </MenuList>
                         </Grid>
-                        <Grid item xs={4}>
-                          <img src={images.todo} alt="ToDo List" style={{ width: '100%', borderRadius: '8px' }} />
+                        <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                          <img src={images.todo} alt="ToDo List" style={{ width: '180px', borderRadius: '8px' }} />
                         </Grid>
                       </Grid>
                     </Grid>
                     {/* Chatbot Section */}
                     <Grid item xs={12} sm={4}>
-                      <MuiTypography variant="subtitle1" style={{ padding: '8px 16px', color: '#ddd' }}>
+                      <MuiTypography
+                        variant="subtitle1"
+                        component={Link}
+                        to="/chatbot"
+                        style={{ padding: '8px 16px', color: '#ddd', textDecoration: 'none' }}
+                      >
                         Chatbot
                       </MuiTypography>
                       <Divider style={{ backgroundColor: '#444', margin: '8px 0' }} />
@@ -257,8 +282,8 @@ const Header = () => {
                             </MenuItem>
                           </MenuList>
                         </Grid>
-                        <Grid item xs={4}>
-                          <img src={images.chatbot} alt="Chatbot" style={{ width: '100%', borderRadius: '8px' }} />
+                        <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                          <img src={images.chatbot} alt="Chatbot" style={{ width: '180px', borderRadius: '8px' }} />
                         </Grid>
                       </Grid>
                     </Grid>

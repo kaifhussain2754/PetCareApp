@@ -1,7 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faListAlt, faBell, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <IconButton
+      onClick={() => navigate(-1)}
+      aria-label="back"
+      style={{ position: 'absolute', top: '20px', left: '20px', color: 'white' }}
+    >
+      <ArrowBackIcon />
+    </IconButton>
+  );
+};
 
 function Reminders() {
   const navigate = useNavigate();
@@ -17,13 +32,14 @@ function Reminders() {
   };
 
   return (
-    <div className="container" style={{ paddingTop: '20px' }}>
-      <h1 className="text-center">Simba's Care Records</h1>
+    <div className="container" style={{ paddingTop: '20px', position: 'relative' }}>
+      <BackButton />
+      <h1 className="text-center">Reminders</h1>
       <div className="row" style={{ marginTop: '20px' }}>
-      <div className="col-md-3 d-flex align-items-stretch">
+        <div className="col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
           <div
             className="card"
-            style={{ cursor: 'pointer', transition: 'all 0.3s ease', marginBottom: '20px', width: '100%' }}
+            style={{ cursor: 'pointer', transition: 'all 0.3s ease', width: '100%' }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -51,10 +67,10 @@ function Reminders() {
             </div>
           </div>
         </div>
-        <div className="col-md-3 d-flex align-items-stretch">
+        <div className="col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
           <div
             className="card"
-            style={{ cursor: 'pointer', transition: 'all 0.3s ease', marginBottom: '20px', width: '100%' }}
+            style={{ cursor: 'pointer', transition: 'all 0.3s ease', width: '100%' }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >

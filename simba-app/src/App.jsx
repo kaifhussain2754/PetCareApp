@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-/>
-
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is included
+
 import Header from './Components/Header'; // Adjust the import path as needed
+import Footer from './Components/Footer'; // Adjust the import path as needed
 
 import Dashboard from './Components/Dashboard';
 import ExpenseCalculator from './Components/ExpenseCalculator';
@@ -42,24 +39,27 @@ function App() {
 
   return (
     <Router>
-      <Header /> {/* Add the Header component here */}
-      <div style={{ paddingTop: '70px' }}> {/* Adjust padding to accommodate Header height */}
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/view-expenses" element={<ExpenseCalculator />} />
-          <Route path="/care" element={<SimbaCare />} />
-          <Route path="/expenseform" element={<AddExpenseForm />} />
-          <Route path="/chatbot" element={<OpenAIChat />} />
-          <Route path="/add-care-record" element={<AddCareRecord />} />
-          <Route path="/all-care-records" element={<CareRecordsTable />} />
-          <Route path="/set-reminder" element={<ReminderForm />} />
-          <Route path="/missed-reminders" element={<MissedReminders />} />
-          <Route path="/reminders" element={<Reminders />} />
-          <Route path="/expenses" element={<ExpensesPage />} />
-          <Route path="/todo-list" element={<ToDoList />} />
-          <Route path="/upcoming-reminders" element={<UpcomingReminders />} />
-          <Route path="/edit-expense/:id" element={<EditExpense />} />
-        </Routes>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Header /> {/* Add the Header component here */}
+        <div style={{ flex: 1, paddingTop: '70px' }}> {/* Adjust padding to accommodate Header height */}
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/view-expenses" element={<ExpenseCalculator />} />
+            <Route path="/care" element={<SimbaCare />} />
+            <Route path="/expenseform" element={<AddExpenseForm />} />
+            <Route path="/chatbot" element={<OpenAIChat />} />
+            <Route path="/add-care-record" element={<AddCareRecord />} />
+            <Route path="/all-care-records" element={<CareRecordsTable />} />
+            <Route path="/set-reminder" element={<ReminderForm />} />
+            <Route path="/missed-reminders" element={<MissedReminders />} />
+            <Route path="/reminders" element={<Reminders />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/todo-list" element={<ToDoList />} />
+            <Route path="/upcoming-reminders" element={<UpcomingReminders />} />
+            <Route path="/edit-expense/:id" element={<EditExpense />} />
+          </Routes>
+        </div>
+        <Footer /> {/* Add the Footer component here */}
       </div>
     </Router>
   );

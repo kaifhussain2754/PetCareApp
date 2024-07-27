@@ -2,6 +2,21 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <IconButton
+      onClick={() => navigate(-1)}
+      aria-label="back"
+      style={{ position: 'absolute', top: '20px', left: '20px', color: 'white' }}
+    >
+      <ArrowBackIcon />
+    </IconButton>
+  );
+};
 
 function ExpensesPage() {
   const navigate = useNavigate();
@@ -17,7 +32,8 @@ function ExpensesPage() {
   };
 
   return (
-    <div className="container" style={{ paddingTop: '20px' }}>
+    <div className="container" style={{ paddingTop: '20px', position: 'relative' }}>
+      <BackButton />
       <h1 className="text-center">Expense Management</h1>
       <div className="row" style={{ marginTop: '20px' }}>
         <div className="col-md-6 d-flex align-items-stretch">

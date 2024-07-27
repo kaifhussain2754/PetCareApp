@@ -132,6 +132,15 @@ const ReminderForm = () => {
           >
             Submit
           </Button>
+
+          <Button
+          variant="outlined"
+          color="inherit"
+          onClick={() => navigate(-1)}
+          sx={{ mt: 2, borderRadius: 2, borderColor: '#ff6f61' }}
+        >
+            Back
+        </Button>
         </form>
         <Dialog open={openDialog} onClose={handleCloseDialog}>
           <DialogTitle>Reminder Status</DialogTitle>

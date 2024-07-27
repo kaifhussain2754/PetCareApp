@@ -3,7 +3,23 @@ import { TextField, Button, Checkbox, FormControlLabel, Select, MenuItem } from 
 import { getTodos, createTodo, updateTodo, deleteTodo } from '../services/apiService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
+import { useNavigate } from 'react-router-dom'; // Add this import
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <IconButton
+      onClick={() => navigate(-1)}
+      aria-label="back"
+      style={{ position: 'absolute', top: '20px', left: '20px', color: '#ffffff' }}
+    >
+      <ArrowBackIcon />
+    </IconButton>
+  );
+};
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -72,6 +88,7 @@ function TodoList() {
 
   return (
     <div style={styles.container}>
+      <BackButton />
       <h1 style={styles.title}>Todo List</h1>
       <div style={styles.formContainer}>
         <TextField
@@ -156,6 +173,7 @@ const styles = {
     WebkitBackdropFilter: 'blur(10px)',
     color: 'white',
     fontFamily: 'Arial, sans-serif',
+    position: 'relative', // Added to position the back button correctly
   },
   title: {
     textAlign: 'center',

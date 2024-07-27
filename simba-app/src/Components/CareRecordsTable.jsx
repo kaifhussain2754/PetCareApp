@@ -97,7 +97,6 @@ const CareRecordsTable = () => {
               <TableCell style={{color: '#fff'}}>Location</TableCell>
               <TableCell style={{color: '#fff'}}>Notes</TableCell>
               <TableCell style={{color: '#fff'}}>Date</TableCell>
-              <TableCell style={{color: '#fff'}}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -116,23 +115,6 @@ const CareRecordsTable = () => {
                   <TableCell style={{color: '#fff'}}>{renderField(record.location)}</TableCell>
                   <TableCell style={{color: '#fff'}}>{renderField(record.notes)}</TableCell>
                   <TableCell style={{color: '#fff'}}>{renderField(formatDate(record.timestamp))}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="warning"
-                      onClick={() => handleEdit(record.id)}
-                      style={{ marginRight: 8 }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDelete(record.id)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
                 </TableRow>
               ))
             ) : (
