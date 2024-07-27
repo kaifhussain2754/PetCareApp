@@ -1,9 +1,12 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from './contect/AuthContext'; // Ensure correct path
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
-  const token = localStorage.getItem('token');
-  return token ? <Component {...rest} /> : <Navigate to="/" />;
+const PrivateRoute = ({ element, ...rest }) => {
+  const { authToken } = useAuth();
+  
+  // Redirect to login if not authenticated, otherwise render the component
+  return authToken ? element : <Navigate to="/" replace />;
 };
 
 export default PrivateRoute;

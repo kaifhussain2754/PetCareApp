@@ -97,7 +97,7 @@ function Dashboard() {
 
   return (
     <div className="container" style={{ paddingTop: '20px', textAlign: 'center' }}>
-      <h1>Welcome to Simba's Care!</h1>
+      <h1>Welcome to Pet Care!</h1>
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is included
 
-import Header from './Components/Header'; // Adjust the import path as needed
-import Footer from './Components/Footer'; // Adjust the import path as needed
-
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 import Dashboard from './Components/Dashboard';
 import ExpenseCalculator from './Components/ExpenseCalculator';
 import SimbaCare from './Components/SimbaCare';
@@ -19,12 +18,16 @@ import ExpensesPage from './Components/ExpensesPage';
 import MissedReminders from './Components/MissedReminders';
 import ToDoList from './Components/ToDoList';
 import OpenAIChat from './OpenAIChat';
+import PrivateRoute from './PrivateRoutes'; // Ensure correct path
+import { AuthProvider } from './contect/AuthContext'; // Ensure correct path
+
+// Import the Login and Signup components
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   useEffect(() => {
-    // Check if notifications are supported
     if ("Notification" in window) {
-      // Request permission
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
           console.log("Notification permission granted.");
@@ -38,30 +41,34 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Header /> {/* Add the Header component here */}
-        <div style={{ flex: 1, paddingTop: '70px' }}> {/* Adjust padding to accommodate Header height */}
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/view-expenses" element={<ExpenseCalculator />} />
-            <Route path="/care" element={<SimbaCare />} />
-            <Route path="/expenseform" element={<AddExpenseForm />} />
-            <Route path="/chatbot" element={<OpenAIChat />} />
-            <Route path="/add-care-record" element={<AddCareRecord />} />
-            <Route path="/all-care-records" element={<CareRecordsTable />} />
-            <Route path="/set-reminder" element={<ReminderForm />} />
-            <Route path="/missed-reminders" element={<MissedReminders />} />
-            <Route path="/reminders" element={<Reminders />} />
-            <Route path="/expenses" element={<ExpensesPage />} />
-            <Route path="/todo-list" element={<ToDoList />} />
-            <Route path="/upcoming-reminders" element={<UpcomingReminders />} />
-            <Route path="/edit-expense/:id" element={<EditExpense />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Header />
+          <div style={{ flex: 1, paddingTop: '70px' }}>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+              <Route path="/view-expenses" element={<PrivateRoute element={<ExpenseCalculator />} />} />
+              <Route path="/care" element={<PrivateRoute element={<SimbaCare />} />} />
+              <Route path="/expenseform" element={<PrivateRoute element={<AddExpenseForm />} />} />
+              <Route path="/chatbot" element={<PrivateRoute element={<OpenAIChat />} />} />
+              <Route path="/add-care-record" element={<PrivateRoute element={<AddCareRecord />} />} />
+              <Route path="/all-care-records" element={<PrivateRoute element={<CareRecordsTable />} />} />
+              <Route path="/set-reminder" element={<PrivateRoute element={<ReminderForm />} />} />
+              <Route path="/missed-reminders" element={<PrivateRoute element={<MissedReminders />} />} />
+              <Route path="/reminders" element={<PrivateRoute element={<Reminders />} />} />
+              <Route path="/expenses" element={<PrivateRoute element={<ExpensesPage />} />} />
+              <Route path="/todo-list" element={<PrivateRoute element={<ToDoList />} />} />
+              <Route path="/upcoming_reminders" element={<PrivateRoute element={<UpcomingReminders />} />} />
+              <Route path="/edit-expense/:id" element={<PrivateRoute element={<EditExpense />} />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer /> {/* Add the Footer component here */}
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
