@@ -1,4 +1,4 @@
-# Simba's Care
+# Pet Care Web Application
 
 ## Overview
 
@@ -19,9 +19,11 @@ Simba's Care is a web application designed initially for our cat Simba, but it h
 
 ### Getting Started
 
+#### Frontend
+
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/simbas-care.git
+   git clone [https://github.com/kaifhussain2754/PetCareApp.git]
    ```
 
 2. **Navigate to the project directory**:
@@ -40,12 +42,41 @@ Simba's Care is a web application designed initially for our cat Simba, but it h
      VITE_APP_API_URL=http://localhost:5000/api/expenses
      ```
 
-5. **Run the application**:
+5. **Run the frontend application**:
    ```bash
    npm run dev
    ```
 
-6. **Open your browser** and go to `http://localhost:5173`.
+6. **Open your browser** and go to `http://localhost:3000`.
+
+#### Backend
+
+1. **Navigate to the backend directory** (if it’s in a separate folder):
+   ```bash
+   cd backend
+   ```
+
+2. **Install backend dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up the environment variables**:
+   - Create a `.env` file in the backend directory and add the necessary configurations:
+     ```env
+     DATABASE_URL=mysql://user:password@localhost:3306/simba-app
+     PORT=5000
+     ```
+
+4. **Run database migrations** (if applicable):
+   ```bash
+   npm run migrate
+   ```
+
+5. **Start the backend server**:
+   ```bash
+   npm start
+   ```
 
 ### Contributing
 
@@ -59,5 +90,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 Feel free to adjust any sections or add more details specific to your project.
 ```
-
-This `README.md` now includes the command snippets for setup and running the application, properly formatted for clarity.
