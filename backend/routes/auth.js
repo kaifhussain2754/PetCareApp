@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, petName } = req.body; // Include petName
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, password: hashedPassword });
+    const user = await User.create({ username, password: hashedPassword, petName }); // Save petName
     res.status(201).json({ message: 'User created', user });
   } catch (error) {
     res.status(500).json({ error: 'Error creating user' });
@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({ token, user }); // Include user data
   } catch (error) {
     res.status(500).json({ error: 'Error logging in' });
   }

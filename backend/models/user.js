@@ -13,6 +13,10 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
+  petName: { // New field for pet name
+    type: DataTypes.STRING,
+    allowNull: true,
+  }
 }, {
   sequelize,
   modelName: 'User',
