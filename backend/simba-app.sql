@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2024 at 01:13 PM
+-- Generation Time: Jul 27, 2024 at 04:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -178,6 +178,29 @@ INSERT INTO `todolist` (`id`, `task_description`, `completed`, `priority`, `crea
 (26, 'Buy Litter box Link - https://amzn.in/d/0iAmVjM9', 0, 'medium', '2024-07-27 09:34:28', '2024-07-27 09:34:30'),
 (27, 'Whiskas Wet food from amazon', 0, 'medium', '2024-07-27 09:35:07', '2024-07-27 09:35:07');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE `Users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `petName` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`id`, `username`, `password`, `createdAt`, `updatedAt`, `petName`) VALUES
+(9, 'test', '$2a$10$nG47O7yRX1QhymEyHAw4Kuu9C/JA6hoLu6/5gqg7dVIzTpBfg8Xae', '2024-07-27 12:48:17', '2024-07-27 12:48:17', NULL),
+(10, 'test2', '$2a$10$RlXyfOXkoyQ2PO8ag2rXiOoFkuPcjHg4j0usW4q1.ua0w6rqcu9Sa', '2024-07-27 13:29:01', '2024-07-27 13:29:01', 'simba');
+
 --
 -- Indexes for dumped tables
 --
@@ -220,6 +243,13 @@ ALTER TABLE `todolist`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -258,6 +288,12 @@ ALTER TABLE `reminders`
 --
 ALTER TABLE `todolist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
