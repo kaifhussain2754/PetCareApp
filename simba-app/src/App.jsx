@@ -48,8 +48,8 @@ function App() {
           <div style={{ flex: 1, paddingTop: '70px' }}>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
               <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+              <Route path="/Signup" element={<PrivateRoute element={<Signup />} />} />
               <Route path="/view-expenses" element={<PrivateRoute element={<ExpenseCalculator />} />} />
               <Route path="/care" element={<PrivateRoute element={<SimbaCare />} />} />
               <Route path="/expenseform" element={<PrivateRoute element={<AddExpenseForm />} />} />
