@@ -20,7 +20,7 @@ const ExpenseCalculator = () => {
       try {
         const response = await getExpenses(); // Use the API service function
         let fetchedExpenses = response;
-
+  
         // Filter expenses based on the selected period
         if (period === 'monthly' && filter) {
           const [year, month] = filter.split('-');
@@ -42,13 +42,13 @@ const ExpenseCalculator = () => {
           const startOfWeek = new Date(startOfYear.setDate(startOfYear.getDate() + (week - 1) * 7));
           const endOfWeek = new Date(startOfWeek);
           endOfWeek.setDate(endOfWeek.getDate() + 6);
-
+  
           fetchedExpenses = fetchedExpenses.filter(expense => {
             const expenseDate = new Date(expense.dateOfExpense);
             return expenseDate >= startOfWeek && expenseDate <= endOfWeek;
           });
         }
-
+  
         // Filter expenses based on search query
         if (searchQuery) {
           fetchedExpenses = fetchedExpenses.filter(expense =>
@@ -56,7 +56,10 @@ const ExpenseCalculator = () => {
             expense.expenseDescription.toLowerCase().includes(searchQuery.toLowerCase())
           );
         }
-
+  
+        // Sort expenses by date in descending order
+        fetchedExpenses.sort((a, b) => new Date(b.dateOfExpense) - new Date(a.dateOfExpense));
+  
         setExpenses(fetchedExpenses);
         const sum = fetchedExpenses.reduce((acc, expense) => acc + parseFloat(expense.expenseAmount), 0);
         setTotal(sum);
@@ -66,9 +69,10 @@ const ExpenseCalculator = () => {
         setError('Failed to fetch expenses');
       }
     };
-
+  
     fetchExpenses();
   }, [period, filter, searchQuery]);
+  
 
   const handlePeriodChange = (event) => {
     setPeriod(event.target.value);
