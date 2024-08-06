@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faPaw, faCheckCircle, faBell, faClipboardList, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
+import WhyChooseUs from './WhyChooseUs';
 
 const LandingPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -15,7 +17,6 @@ const LandingPage = () => {
   ];
 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS with desired settings
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -197,8 +198,12 @@ const LandingPage = () => {
           <h1 style={{ color: 'black', fontWeight: 'bold' }}>Welcome to PetCare!</h1>
           <p>Your one-stop solution for managing all your pet's needs. From reminders to expenses, we've got you covered.</p>
           <div>
+            <Link to="/login">
             <button style={buttonStyle}>Login</button>
+            </Link>
+            <Link to="/signup">
             <button style={{ ...buttonStyle, marginLeft: '10px' }}>Sign Up</button>
+            </Link>
           </div>
         </div>
         <div style={downArrowWrapperStyle}>
@@ -223,6 +228,7 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
+      <WhyChooseUs />
     </>
   );
 };
