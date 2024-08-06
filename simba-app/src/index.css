@@ -2,7 +2,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: 'Roboto', sans-serif;
   color: #f6e3e4;
   background: linear-gradient(135deg, #c31432 0%, #240b36 100%);

@@ -24,6 +24,7 @@ import { AuthProvider } from './contect/AuthContext'; // Ensure correct path
 // Import the Login and Signup components
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import LandingPage from './Components/LandingPage';
 
 function App() {
   useEffect(() => {
@@ -47,9 +48,10 @@ function App() {
           <Header />
           <div style={{ flex: 1, paddingTop: '70px' }}>
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-              <Route path="/Signup" element={<PrivateRoute element={<Signup />} />} />
+              <Route path="/Signup" element={<Signup />} />
               <Route path="/view-expenses" element={<PrivateRoute element={<ExpenseCalculator />} />} />
               <Route path="/care" element={<PrivateRoute element={<SimbaCare />} />} />
               <Route path="/expenseform" element={<PrivateRoute element={<AddExpenseForm />} />} />
