@@ -317,7 +317,7 @@ const Header = () => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button
                   component={Link}
-                  to="/"
+                  to="/login"
                   variant="text"
                   style={{
                     color: '#fff',
