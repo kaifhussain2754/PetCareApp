@@ -1,51 +1,16 @@
 import React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faStar, faUsers, faShieldAlt, faAward, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const WhyChooseUs = () => {
   // Initialize AOS
   React.useEffect(() => {
-    AOS.init({ duration: 9000 });
+    AOS.init({ duration: 1000 });
   }, []);
-
-  const sectionStyle = {
-    padding: '50px 20px',
-    height: '100vh',
-    background: 'url(/background.jpg) no-repeat center center/cover',
-    textAlign: 'center',
-    borderRadius: '20px',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.9)',
-    marginBottom: '2%',
-    position: 'relative',
-    color: 'white',
-  };
-
-  const cardStyle = {
-    background: 'rgba(0, 0, 0, 0.8)',
-    borderRadius: '10px',
-    padding: '30px',
-    color: 'white',
-    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.2)',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    cursor: 'pointer',
-    textAlign: 'center',
-    width: '300px',
-    height: 'auto',
-    margin: '10px',
-  };
-
-  const cardHoverStyle = {
-    cursor: 'pointer',
-    boxShadow: '0px 0px 20px #ff6f61',
-  };
-
-  const iconStyle = {
-    color: '#ff6f61',
-    marginBottom: '10px',
-  };
 
   const features = [
     {
@@ -87,31 +52,32 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <Container style={sectionStyle}>
-      <Typography variant="h4" gutterBottom style={{ color: 'white', fontWeight: 'bold' }}>
+    <Container 
+      fluid 
+      className="p-5 min-vh-100 d-flex flex-column align-items-center text-white" 
+      style={{ background: 'url(/background.jpg) no-repeat center center/cover', borderRadius: '20px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.9)' }}
+    >
+      <h4 className="font-weight-bold mb-4">
         Why Choose Us?
-      </Typography>
-      <Box 
-        display="flex" 
-        justifyContent="center" 
-        flexWrap="wrap" 
-        alignItems="flex-start" 
-        style={{ gap: '20px' }} // Add gap between cards
-      >
+      </h4>
+      <Row className="g-4 justify-content-center">
         {features.map((feature) => (
-          <div
-            key={feature.id}
-            data-aos="zoom-in-up"
-            style={cardStyle}
-            onMouseEnter={(e) => Object.assign(e.currentTarget.style, cardHoverStyle)}
-            onMouseLeave={(e) => Object.assign(e.currentTarget.style, cardStyle)}
-          >
-            <FontAwesomeIcon icon={feature.icon} size="3x" style={iconStyle} />
-            <Typography variant="h6">{feature.title}</Typography>
-            <Typography variant="body2">{feature.description}</Typography>
-          </div>
+          <Col xs={12} md={6} lg={4} key={feature.id} data-aos="zoom-in-up">
+            <Card 
+              className="bg-dark text-white border-0 rounded shadow-lg"
+              style={{ cursor: 'pointer' }}
+              onMouseEnter={(e) => e.currentTarget.classList.add('shadow-lg', 'border-primary')}
+              onMouseLeave={(e) => e.currentTarget.classList.remove('shadow-lg', 'border-primary')}
+            >
+              <Card.Body className="text-center p-4">
+                <FontAwesomeIcon icon={feature.icon} size="3x" className="text-warning mb-3" />
+                <Card.Title className="h5">{feature.title}</Card.Title>
+                <Card.Text>{feature.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </Box>
+      </Row>
     </Container>
   );
 };
